@@ -30,3 +30,6 @@ client/dist/
 
 # Server
 server/dist/
+
+#Lint & Prettier
+eslint.config.mts
