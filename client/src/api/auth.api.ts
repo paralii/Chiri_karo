@@ -6,6 +6,7 @@ import {
   AuthUser,
   ForgotPasswordPayload,
   InviteAdminPayload,
+  invitePatientPayload,
   LoginPayload,
   RegisterPayload,
   ResendOtpPayload,
@@ -91,6 +92,12 @@ export const inviteAdminRequest = async (
   payload: InviteAdminPayload,
 ): Promise<void> => {
   await httpClient.post("/auth/admin/invite", payload);
+};
+
+export const invitePatientRequest = async (
+  payload: invitePatientPayload,
+): Promise<void> => {
+  await httpClient.post("/auth/clinic/patients", payload);
 };
 
 export const acceptInviteRequest = async (

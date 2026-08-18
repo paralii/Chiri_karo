@@ -38,6 +38,7 @@ import {
   acceptInviteSchema,
 } from "../validations/auth.validation";
 import { Role } from "../../shared/enums/Role.enum";
+import { IRegisterUseCase } from "container/IRegisterUseCase";
 
 const userRepository = new UserRepository();
 const passwordService = new PasswordService();
@@ -47,7 +48,7 @@ const oauthService = new GoogleOAuthService();
 const otpService = new OtpService();
 const emailService = new EmailService();
 
-const registerUseCase = new RegisterUseCase(
+const registerUseCase : IRegisterUseCase = new RegisterUseCase(
   userRepository,
   passwordService,
   tokenService,
@@ -168,7 +169,7 @@ router.post(
 router.post(
   "/admin/invite",
   authenticate,
-  authorize(Role.ADMIN),
+  authorize(Role.SUPER_ADMIN),
   validate(inviteAdminSchema),
   authController.inviteAdmin,
 );

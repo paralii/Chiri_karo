@@ -18,9 +18,7 @@ export class ForgotPasswordUseCase {
   public async execute(dto: ForgotPasswordDto): Promise<void> {
     const user = await this.userRepository.findByEmail(dto.email);
 
-    if (!user || !user.password) {
-      return;
-    }
+   
 
     const token = crypto.randomBytes(32).toString("hex");
     await this.cacheService.set(

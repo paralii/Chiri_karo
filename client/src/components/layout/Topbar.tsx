@@ -15,7 +15,7 @@ export const Topbar = (): JSX.Element => {
   return (
     <header className="flex h-16 items-center justify-between border-b border-ink-100 bg-surface-raised px-6">
       <span className="font-display text-sm font-medium text-ink-500">
-        Clinic Workspace
+         
       </span>
       <Button
         variant="ghost"

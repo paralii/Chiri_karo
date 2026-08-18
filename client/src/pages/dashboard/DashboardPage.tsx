@@ -11,25 +11,47 @@ import {
 import { useAppSelector } from "../../store/hooks";
 import { selectAuthUser } from "../../store/selectors/auth.selectors";
 
-const AdminQuickActions = (): JSX.Element => (
+const AdminQuickActions = () => (
   <Card>
     <CardHeader>
-      <CardTitle>Clinic administration</CardTitle>
+      <CardTitle>Clinic Management</CardTitle>
     </CardHeader>
+
     <CardContent className="flex flex-col gap-3">
       <p className="text-sm text-ink-500">
-        Manage who has administrator access to this clinic.
+        Invite and manage clinics in the system.
       </p>
-      <Link to="/dashboard/admin/invite">
-        <Button variant="outline" size="sm">
+
+      <Link to="/dashboard/admin/clinics">
+        <Button>
           <UserPlus className="h-4 w-4" />
-          Invite an admin
+          Manage Clinics
         </Button>
       </Link>
     </CardContent>
   </Card>
 );
 
+const ClinicQuickActions = () => (
+  <Card>
+    <CardHeader>
+      <CardTitle>Patient Management</CardTitle>
+    </CardHeader>
+
+    <CardContent className="flex flex-col gap-3">
+      <p className="text-sm text-ink-500">
+        Invite and manage patients for your clinic.
+      </p>
+
+      <Link to="/dashboard/clinic/patients">
+        <Button>
+          <Users className="h-4 w-4" />
+          Manage Patients
+        </Button>
+      </Link>
+    </CardContent>
+  </Card>
+);
 const StaffQuickActions = (): JSX.Element => (
   <Card>
     <CardHeader>
@@ -72,7 +94,7 @@ export const DashboardPage = (): JSX.Element => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {/* <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <Card>
           <CardHeader>
             <CardTitle>Today&apos;s appointments</CardTitle>
@@ -108,11 +130,11 @@ export const DashboardPage = (): JSX.Element => {
             <StatusPill status="pending" label="No data yet" />
           </CardContent>
         </Card>
-      </div>
+      </div> */}
 
       {user?.role === "admin" && <AdminQuickActions />}
-      {(user?.role === "dentist" || user?.role === "receptionist") && (
-        <StaffQuickActions />
+      {(user?.role === "clinic" || user?.role === "receptionist") && (
+        <ClinicQuickActions />
       )}
       {user?.role === "patient" && <PatientQuickActions />}
     </div>

@@ -1,4 +1,4 @@
-export type UserRole = "admin" | "dentist" | "receptionist" | "patient";
+export type UserRole = "admin" | "clinic" | "dentist" | "receptionist" | "patient";
 
 export interface AuthUser {
   id: string;
@@ -44,6 +44,11 @@ export interface ResetPasswordPayload {
 }
 
 export interface InviteAdminPayload {
+  name: string;
+  email: string;
+}
+
+export interface invitePatientPayload {
   name: string;
   email: string;
 }

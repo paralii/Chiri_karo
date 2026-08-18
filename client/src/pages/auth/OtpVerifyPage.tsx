@@ -9,6 +9,7 @@ import {
 } from "../../hooks/useAuthMutations";
 import { ApiErrorResponse } from "../../types/api.types";
 
+const OTP_EXPIRY_SECONDS = 2 * 60;
 const RESEND_COOLDOWN_SECONDS = 60;
 
 interface LocationState {
@@ -27,6 +28,18 @@ export const OtpVerifyPage = (): JSX.Element => {
   const [formError, setFormError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [cooldown, setCooldown] = useState(0);
+
+  const [otpTimer, setOtpTimer] = useState(OTP_EXPIRY_SECONDS);
+
+  useEffect(() => {
+    if (otpTimer <= 0) return;
+
+    const timer = setInterval(() => {
+      setOtpTimer((prev) => prev - 1);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [otpTimer]);
 
   useEffect(() => {
     if (cooldown <= 0) return;
@@ -51,7 +64,10 @@ export const OtpVerifyPage = (): JSX.Element => {
       setFormError("Enter the 6-digit code sent to your email.");
       return;
     }
-
+    if (otpTimer <= 0) {
+      setFormError("This OTP has expired. Please request a new one.");
+      return;
+    }
     try {
       await verifyMutation.mutateAsync({ email, code });
       navigate("/login", { replace: true, state: { verified: true } });
@@ -72,6 +88,7 @@ export const OtpVerifyPage = (): JSX.Element => {
       await resendMutation.mutateAsync({ email });
       setSuccessMessage("A new code has been sent to your email.");
       setCooldown(RESEND_COOLDOWN_SECONDS);
+      setOtpTimer(OTP_EXPIRY_SECONDS);
     } catch (error) {
       const axiosError = error as AxiosError<ApiErrorResponse>;
       setFormError(
@@ -89,7 +106,17 @@ export const OtpVerifyPage = (): JSX.Element => {
       <form className="flex flex-col gap-5" onSubmit={handleSubmit} noValidate>
         {formError && <Alert variant="danger">{formError}</Alert>}
         {successMessage && <Alert variant="success">{successMessage}</Alert>}
-
+        <p
+          className={`text-center text-sm ${
+            otpTimer <= 30 ? "text-red-500" : "text-ink-500"
+          }`}
+        >
+          OTP expires in{" "}
+          <span className="font-semibold">
+            {String(Math.floor(otpTimer / 60)).padStart(2, "0")}:
+            {String(otpTimer % 60).padStart(2, "0")}
+          </span>
+        </p>
         <OtpInput
           value={code}
           onChange={setCode}

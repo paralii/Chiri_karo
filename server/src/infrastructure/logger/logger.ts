@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import winston from "winston";
-import { loggerConfig } from "../../config/logger.config";
+import { loggerConfig } from "../config/logger.config";
 
 const LOG_DIR = path.join(process.cwd(), "logs");
 

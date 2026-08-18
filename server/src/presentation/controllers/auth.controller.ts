@@ -28,10 +28,12 @@ import {
 import { AUTH_CONSTANTS } from "../../shared/constants/auth.constants";
 import { appConfig } from "../../infrastructure/config";
 import { UnauthorizedError, BadRequestError } from "../../shared/errors";
+import { IRegisterUseCase } from "container/IRegisterUseCase";
+import { ApiError } from "shared/errors/ApiError";
 
 export class AuthController {
   constructor(
-    private readonly registerUseCase: RegisterUseCase,
+    private readonly registerUseCase: IRegisterUseCase,
     private readonly loginUseCase: LoginUseCase,
     private readonly refreshTokenUseCase: RefreshTokenUseCase,
     private readonly logoutUseCase: LogoutUseCase,

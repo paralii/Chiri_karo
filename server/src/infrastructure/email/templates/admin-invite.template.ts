@@ -8,7 +8,7 @@ export const renderAdminInviteTemplate = (
     title: "You've been invited",
     bodyHtml: `
       <h2 style="margin-top:0;">Hi ${name},</h2>
-      <p>You've been invited to join Chirikaro as a clinic staff.</p>
+      <p>You've been invited to join Chirikaro as a clinic admin.</p>
       <p style="text-align:center;margin:28px 0;">
         <a href="${acceptLink}" style="background-color:#0f766e;color:#ffffff;padding:12px 24px;border-radius:6px;text-decoration:none;font-weight:bold;">
           Set up your account

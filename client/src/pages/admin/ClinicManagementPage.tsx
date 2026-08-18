@@ -18,7 +18,7 @@ interface FieldErrors {
   email?: string;
 }
 
-export const InviteAdminPage = (): JSX.Element => {
+export const ClinicManagementPage = (): JSX.Element => {
   const inviteAdminMutation = useInviteAdminMutation();
 
   const [name, setName] = useState("");
@@ -65,19 +65,19 @@ export const InviteAdminPage = (): JSX.Element => {
   };
 
   return (
-    <div className="flex max-w-lg flex-col gap-6">
+    <div className="flex flex-col gap-6">
       <div>
-        <h1 className="font-display text-xl font-semibold text-ink-900">
-          Invite a clinic admin
-        </h1>
-        <p className="text-sm text-ink-500">
-          They&apos;ll receive an email to set up their password.
-        </p>
-      </div>
+    <h1 className="font-display text-xl font-semibold text-ink-900">
+      Clinic Management
+    </h1>
+    <p className="text-sm text-ink-500">
+      Invite new clinics and manage existing clinic accounts.
+    </p>
+  </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>New admin invite</CardTitle>
+          <CardTitle>New Clinic admin invite</CardTitle>
         </CardHeader>
         <CardContent>
           <form
@@ -116,6 +116,32 @@ export const InviteAdminPage = (): JSX.Element => {
           </form>
         </CardContent>
       </Card>
+
+      <Card>
+  <CardHeader>
+    <CardTitle>Clinics</CardTitle>
+  </CardHeader>
+
+  <CardContent>
+    <div className="overflow-x-auto">
+      <table className="min-w-full text-sm">
+        <thead className="border-b border-ink-100">
+          <tr>
+            <th className="py-3 text-left">Clinic</th>
+            <th className="py-3 text-left">Email</th>
+            <th className="py-3 text-left">Status</th>
+            <th className="py-3 text-right">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {/* map clinics here */}
+        </tbody>
+      </table>
+    </div>
+  </CardContent>
+</Card>
+
     </div>
   );
 };

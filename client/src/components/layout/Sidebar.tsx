@@ -20,18 +20,18 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { to: "/dashboard", label: "Overview", icon: LayoutDashboard },
-  { to: "/dashboard/appointments", label: "Appointments", icon: CalendarDays },
   {
-    to: "/dashboard/patients",
+  to: "/dashboard/admin/clinics",
+  label: "Clinics",
+  icon: UserPlus,
+  roles: ["admin"],
+},
+  // { to: "/dashboard/appointments", label: "Appointments", icon: CalendarDays, roles: ["dentist", "receptionist"] },
+  {
+    to: "/dashboard/clinic/patients",
     label: "Patients",
     icon: Users,
-    roles: ["admin", "dentist", "receptionist"],
-  },
-  {
-    to: "/dashboard/admin/invite",
-    label: "Invite Admin",
-    icon: UserPlus,
-    roles: ["admin"],
+    roles: ["clinic", "receptionist"],
   },
 ];
 

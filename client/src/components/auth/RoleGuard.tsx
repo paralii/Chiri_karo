@@ -9,7 +9,7 @@ export interface RoleGuardProps {
 
 export const RoleGuard = ({ allowedRoles }: RoleGuardProps): JSX.Element => {
   const user = useAppSelector(selectAuthUser);
-
+  console.log(user);
   if (!user || !allowedRoles.includes(user.role)) {
     return <Navigate to="/unauthorized" replace />;
   }

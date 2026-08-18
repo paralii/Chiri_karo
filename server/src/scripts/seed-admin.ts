@@ -52,7 +52,7 @@ const run = async (): Promise<void> => {
       name,
       email: email.toLowerCase(),
       password: hashedPassword,
-      role: Role.ADMIN,
+      role: Role.SUPER_ADMIN,
       isEmailVerified: true,
     });
 

@@ -10,11 +10,12 @@ import { ResetPasswordPage } from "../pages/auth/ResetPasswordPage";
 import { AcceptInvitePage } from "../pages/auth/AcceptInvitePage";
 import { OAuthSuccessPage } from "../pages/auth/OAuthSuccessPage";
 import { DashboardPage } from "../pages/dashboard/DashboardPage";
-import { InviteAdminPage } from "../pages/dashboard/InviteAdminPage";
+import { ClinicManagementPage } from "../pages/admin/ClinicManagementPage";
 import { ProtectedRoute } from "../components/auth/ProtectedRoute";
 import { GuestRoute } from "../components/auth/GuestRoute";
 import { RoleGuard } from "../components/auth/RoleGuard";
 import { DashboardLayout } from "../components/layout/DashboardLayout";
+import { PatientManagementPage } from "../pages/clinic/PatientManagementPage";
 
 export const AppRoutes = (): JSX.Element => {
   return (
@@ -38,9 +39,17 @@ export const AppRoutes = (): JSX.Element => {
 
           <Route element={<RoleGuard allowedRoles={["admin"]} />}>
             <Route
-              path="/dashboard/admin/invite"
-              element={<InviteAdminPage />}
+              path="/dashboard/admin/clinics"
+              element={<ClinicManagementPage />}
             />
+          </Route>
+          <Route
+            element={<RoleGuard allowedRoles={["clinic", "receptionist"]} />}
+          >
+            {/* <Route
+              path="/dashboard/clinic/patients"
+              element={<PatientManagementPage />}
+            /> */}
           </Route>
         </Route>
       </Route>

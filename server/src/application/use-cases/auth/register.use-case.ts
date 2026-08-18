@@ -9,6 +9,7 @@ import { AuthResponseDto } from "../../dto/auth/AuthResponseDto";
 import { Role } from "../../../shared/enums/Role.enum";
 import { ConflictError } from "../../../shared/errors";
 import { buildRefreshTokenKey } from "../../../shared/constants/redis-keys.constant";
+import { IRegisterUseCase } from "container/IRegisterUseCase";
 
 export interface RegisterResult {
   authResponse: AuthResponseDto;
@@ -16,7 +17,7 @@ export interface RegisterResult {
   refreshTokenTtlSeconds: number;
 }
 
-export class RegisterUseCase {
+export class RegisterUseCase implements IRegisterUseCase{
   constructor(
     private readonly userRepository: IUserRepository,
     private readonly passwordService: IPasswordService,

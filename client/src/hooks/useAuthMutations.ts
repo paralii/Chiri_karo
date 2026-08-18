@@ -3,6 +3,7 @@ import {
   acceptInviteRequest,
   forgotPasswordRequest,
   inviteAdminRequest,
+  invitePatientRequest,
   loginRequest,
   logoutRequest,
   registerRequest,
@@ -117,6 +118,16 @@ export const useInviteAdminMutation = (): UseMutationResult<
 > => {
   return useMutation({
     mutationFn: (payload: InviteAdminPayload) => inviteAdminRequest(payload),
+  });
+};
+
+export const useInvitePatientMutation = (): UseMutationResult<
+  void,
+  unknown,
+  InviteAdminPayload
+> => {
+  return useMutation({
+    mutationFn: (payload: InvitePatientPayload) => invitePatientRequest(payload),
   });
 };
 

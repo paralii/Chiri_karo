@@ -26,7 +26,7 @@ export class InviteAdminUseCase {
     const user = await this.userRepository.create({
       name: dto.name,
       email: dto.email.toLowerCase(),
-      role: Role.ADMIN,
+      role: Role.CLINIC,
       isEmailVerified: true,
     });
 
